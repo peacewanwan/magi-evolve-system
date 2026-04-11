@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Write",
+      "Glob",
+      "Grep",
+      "Bash(obsidian *)",
+      "Bash(defuddle *)",
+      "WebSearch",
+      "WebFetch"
+    ]
+  }
+}
