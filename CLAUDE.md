@@ -349,6 +349,9 @@ claude
 ### knowledge-base/ への書き込みルール
 - **基本：書き込み禁止** — ナレッジノートへの書き込みは禁止
 - **例外：NotePublishing/ 配下は全て書き込み許可**（Ideas/, Output/, Drafts/, Calibration/）
+- **NotePublishing/ のファイルを作成・更新した場合は、必ず Obsidian vault 側にもコピーすること**
+  - コピー先：`~/Library/Mobile Documents/iCloud~md~obsidian/Documents/ObsidianVault/24offmap/NotePublishing/` 配下の対応フォルダ
+  - オーナーがObsidianから直接確認・振り返りできるようにするため
 
 ### 一次情報の必須性
 - 体験していない、実測していない、判断していないテーマは記事化しない
@@ -386,3 +389,40 @@ claude
 - `voice-patterns.md` — AI vs オーナーの乖離パターン集（Calibration/配下）
 - `.claude/agents/*.md` — 各エージェントの詳細プロンプト
 - `.claude/commands/publish.md` — パイプライン実行コマンド
+
+---
+
+## 関連リポジトリ：二輪四輪オフマップ（開発リポジトリ）
+
+note記事のメインテーマであるWebサービスの開発リポジトリ。
+
+- **リポジトリ**：`/Users/takeomba/car-event-map-pre`
+- **GitHub**：https://github.com/peacewanwan/car-event-map-pre
+- **サービス**：https://24offmap.jp
+- **CLAUDE.md**：上記パスのCLAUDE.mdを参照
+
+### 関係性
+- オフマップの開発過程・学び・失敗談がnote記事のネタになる
+- 開発中に気づいた記事ネタは Ideas/ にメモとして残す
+- オフマップのCLAUDE.mdに技術スタック・DB構成・フォルダ構成・デザイン方針等の開発情報あり
+- 記事で技術的な内容に触れる場合はオフマップのCLAUDE.mdを参照すること
+- セッション中にオフマップ側のファイルを変更した場合、コミットはあちら側のリポジトリで行う
+- 作業開始時や状況が不明な場合は、両方のリポジトリのgit logを確認して最新状態を把握すること
+
+### Obsidian Vault（共通ナレッジベース）
+
+両リポジトリ共通の参照先。過去のセッション履歴・チャット履歴・開発ナレッジが全て格納されている。
+
+- **Vault パス**：`~/Library/Mobile Documents/iCloud~md~obsidian/Documents/ObsidianVault/`
+- **注意**：macOS FinderからiCloudのObsidianコンテナは直接ブラウズ不可（Terminalからはアクセス可能）
+
+| フォルダ | 内容 |
+|---------|------|
+| `24offmap/sessions/` | セッションまとめ（session-summary-*.md） |
+| `24offmap/chats/` | Claude Export変換済みチャット履歴 |
+| `24offmap/knowledge/` | project_knowledge |
+| `24offmap/note-articles/` | note記事関連 |
+| `24offmap/未分類MD/` | 各種ダウンロードMD（調査結果等） |
+| `24offmap/NotePublishing/` | 記事制作の作業領域（Ideas/Drafts/Output） |
+
+状況が不明な場合やオーナーの過去の判断・発言を確認したい場合は、sessions/ や chats/ を参照すること。
