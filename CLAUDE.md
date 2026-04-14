@@ -404,22 +404,36 @@ claude
 ## セッション切替手順
 
 ### 終了時（現セッション）
-1. **未コミットの変更をすべてコミット**
-2. **リモートにプッシュ**（worktreeブランチ）
-3. **Obsidianに必要ファイルをコピー**
+1. **必須ファイルの存在・整合性チェック**:
+   - `NOTE_CONCEPT.md` — セッション中の変更（番号変更、公開状態）が反映されているか
+   - `STYLE_GUIDE.md` — 存在するか
+   - `voice_profile.md` — 存在するか。セッション中に発見した声の特徴があれば追記
+   - `voice-patterns.md` — セッション中に発見したパターンが追記されているか
+   - `knowledge-base/` — シンボリックリンクが有効か
+   - `series-plan.md` — セッション中の構成変更が反映されているか
+   - **欠けているファイルがあればハンドオフ前に作成・修正する**
+2. **未コミットの変更をすべてコミット**
+3. **リモートにプッシュ**（worktreeブランチ + mainにマージ）
+4. **Obsidianに必要ファイルをコピー**
    - コピー先: `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/ObsidianVault/24offmap/NotePublishing/`
    - 対象: Output/, Drafts/, Ideas/, Calibration/, Published-Current/ の変更分
-4. **ハンドオフプロンプトを作成**
+5. **ハンドオフプロンプトを作成**
    - `NotePublishing/Ideas/session-handoff-{日付}.md` に保存
    - 内容: 現在の状態、完了した作業、未完了のタスク、次にやるべきこと、注意事項
 
 ### 開始時（次のセッション）
-1. **ハンドオフプロンプトを読む**（前セッションの `session-handoff-{日付}.md`）
-2. **worktreeの状態を確認**: `git status`, `git log --oneline -10`
-3. **Published-Currentの内容を確認**: 最新の公開状況を把握
-4. **voice-patterns.mdを読む**: 学習済みパターンを把握（P-001〜）
-5. **series-plan.mdを読む**: 構成案の最新状態を把握
-6. **knowledge-base/のパーソナリティ情報を読む**: オーナーの人物像を把握
+1. **必須ファイルの存在チェック**（オンボーディング条件）:
+   - `NOTE_CONCEPT.md` — 存在し、内容が最新か（番外編の番号、公開状況）
+   - `STYLE_GUIDE.md` — 存在し、中身があるか
+   - `voice_profile.md` — 存在し、中身があるか
+   - `knowledge-base/` — シンボリックリンクが有効か（`ls knowledge-base/` で確認）
+   - **1つでも欠けていたら、作業前に修正する**
+2. **ハンドオフプロンプトを読む**（前セッションの `session-handoff-{日付}.md`）
+3. **worktreeの状態を確認**: `git status`, `git log --oneline -10`
+4. **Published-Currentの内容を確認**: 最新の公開状況を把握
+5. **voice-patterns.mdを読む**: 学習済みパターンを把握（P-001〜）
+6. **series-plan.mdを読む**: 構成案の最新状態を把握
+7. **knowledge-base/のパーソナリティ情報を読む**: オーナーの人物像を把握
 
 ### ハンドオフプロンプトのテンプレート
 
@@ -441,6 +455,14 @@ claude
 ## 注意事項・コンテキスト
 - （セッション中に判明した重要情報）
 - （オーナーの方針変更等）
+
+## 必須ファイル存在チェック（次セッション開始時に確認）
+- [ ] NOTE_CONCEPT.md — 内容が最新か
+- [ ] STYLE_GUIDE.md — 存在するか
+- [ ] voice_profile.md — 存在するか
+- [ ] voice-patterns.md — パターンが最新か
+- [ ] knowledge-base/ — シンボリックリンクが有効か
+- [ ] series-plan.md — 構成が最新か
 
 ## 参照すべきファイル
 - （このセッションで更新した重要ファイルのパス）
