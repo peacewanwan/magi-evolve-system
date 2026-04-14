@@ -378,11 +378,82 @@ claude
 12. オーナーが手直し → note.com 投稿
 13. `/publish --calibrate` で学習サイクル
 
+## シリーズ現状（2026-04-14時点）
+
+### タイトルフォーマット
+- **本編**: `非エンジニアなのに、〇〇 〜意識低い系おじさんがAIと何かを作る話⑫〜`
+  - 「非エンジニアなのに、」の後は**反語**（〇〇した/できた/語ってみる等）でないとおかしい
+  - 「知らなかった」「できなかった」等の当たり前の内容はNG
+- **番外編**: `【番外編◯】【意識低い系おじさんのAI活用術】○○`
+
+### 公開状況
+
+| # | タイトル | 状態 |
+|---|---------|------|
+| ①〜⑫ | リライト済み | ✅ 公開済み |
+| ⑬ | Claude Codeで開発が変わった | 完成済み（Published-Current） |
+| 番外①② | — | ✅ 公開済み |
+| 番外③ | 自己紹介編 | パイプライン通過・公開待ち |
+| 番外④ | 言葉の意味も分からず開発を進めてた話 | Draftsに戻し（要パイプライン再通過） |
+
+### 構成案（仮番）
+`NotePublishing/Ideas/series-plan.md` に詳細あり。⑭以降は仮番で、途中分割あり得る。最終回は決めない。
+
+---
+
+## セッション切替手順
+
+### 終了時（現セッション）
+1. **未コミットの変更をすべてコミット**
+2. **リモートにプッシュ**（worktreeブランチ）
+3. **Obsidianに必要ファイルをコピー**
+   - コピー先: `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/ObsidianVault/24offmap/NotePublishing/`
+   - 対象: Output/, Drafts/, Ideas/, Calibration/, Published-Current/ の変更分
+4. **ハンドオフプロンプトを作成**
+   - `NotePublishing/Ideas/session-handoff-{日付}.md` に保存
+   - 内容: 現在の状態、完了した作業、未完了のタスク、次にやるべきこと、注意事項
+
+### 開始時（次のセッション）
+1. **ハンドオフプロンプトを読む**（前セッションの `session-handoff-{日付}.md`）
+2. **worktreeの状態を確認**: `git status`, `git log --oneline -10`
+3. **Published-Currentの内容を確認**: 最新の公開状況を把握
+4. **voice-patterns.mdを読む**: 学習済みパターンを把握（P-001〜）
+5. **series-plan.mdを読む**: 構成案の最新状態を把握
+6. **knowledge-base/のパーソナリティ情報を読む**: オーナーの人物像を把握
+
+### ハンドオフプロンプトのテンプレート
+
+```markdown
+# セッションハンドオフ — {日付}
+
+## 前セッションで完了した作業
+- （箇条書き）
+
+## 現在の状態
+- Published-Current: （最新の公開状況）
+- Drafts: （作業中のドラフト）
+- パイプライン: （進行中のステージがあれば）
+
+## 次にやるべきこと（優先順）
+1. （最優先タスク）
+2. ...
+
+## 注意事項・コンテキスト
+- （セッション中に判明した重要情報）
+- （オーナーの方針変更等）
+
+## 参照すべきファイル
+- （このセッションで更新した重要ファイルのパス）
+```
+
+---
+
 ## 関連ファイル
 
 - `NOTE_CONCEPT.md` — noteアカウントのコンセプト定義・発信の軸
 - `STYLE_GUIDE.md` — 文体・ルール・禁止表現
 - `voice_profile.md` — 発言パターン分析
 - `voice-patterns.md` — AI vs オーナーの乖離パターン集（Calibration/配下）
+- `NotePublishing/Ideas/series-plan.md` — シリーズ構成案・ネタ候補
 - `.claude/agents/*.md` — 各エージェントの詳細プロンプト
 - `.claude/commands/publish.md` — パイプライン実行コマンド
