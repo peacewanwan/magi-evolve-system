@@ -5,7 +5,17 @@
       "Write",
       "Glob",
       "Grep",
-      "Bash(*)",
+      "Bash(git *)",
+      "Bash(gh *)",
+      "Bash(ls *)",
+      "Bash(mkdir *)",
+      "Bash(cp *)",
+      "Bash(mv *)",
+      "Bash(npm *)",
+      "Bash(npx *)",
+      "Bash(wc *)",
+      "Bash(head *)",
+      "Bash(tail *)",
       "WebSearch",
       "WebFetch"
     ]
