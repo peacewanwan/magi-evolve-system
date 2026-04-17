@@ -17,7 +17,11 @@
       "Bash(head *)",
       "Bash(tail *)",
       "WebSearch",
-      "WebFetch"
+      "WebFetch",
+      "Agent",
+      "Edit",
+      "Bash(find *)",
+      "Bash(rm *)"
     ]
   }
 }
