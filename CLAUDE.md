@@ -501,3 +501,12 @@ claude
 - `NotePublishing/Ideas/series-plan.md` — シリーズ構成案・ネタ候補
 - `.claude/agents/*.md` — 各エージェントの詳細プロンプト
 - `.claude/commands/publish.md` — パイプライン実行コマンド
+
+## Chat側MD自動振り分け連携（2026-04-19）
+
+Chat（claude.ai）側で `note-idea-*.md` として起票されたネタは、ダウンロード後にウォッチャーが自動で `NotePublishing/Ideas/` に流し込む（`ObsidianVault/magi` symlink経由）。
+
+- **出力ルール正本**: `knowledge-base/decisions/decision-2026-04-19-chat-md-output-rules.md`
+- **ウォッチャー全量**: `knowledge-base/knowledge/watcher-rules-current.md`
+- **symlink**: `ObsidianVault/magi` → `/Users/takeomba/Claude Agent/magi-evolve-system/NotePublishing/`（vault側から張る逆方向）
+- この連携により、Chatで「ネタとして起票して」→自動で `Ideas/` に着地する運用が成立
