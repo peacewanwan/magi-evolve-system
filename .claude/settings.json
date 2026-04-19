@@ -3,25 +3,33 @@
     "allow": [
       "Read",
       "Write",
+      "Edit",
       "Glob",
       "Grep",
+      "TodoWrite",
+      "Agent",
       "Bash(git *)",
       "Bash(gh *)",
       "Bash(ls *)",
       "Bash(mkdir *)",
       "Bash(cp *)",
       "Bash(mv *)",
+      "Bash(rm *)",
+      "Bash(cat *)",
+      "Bash(echo *)",
+      "Bash(find *)",
+      "Bash(cd *)",
+      "Bash(pwd)",
+      "Bash(touch *)",
       "Bash(npm *)",
       "Bash(npx *)",
       "Bash(wc *)",
       "Bash(head *)",
       "Bash(tail *)",
+      "Bash(rsync *)",
+      "Bash(open *)",
       "WebSearch",
-      "WebFetch",
-      "Agent",
-      "Edit",
-      "Bash(find *)",
-      "Bash(rm *)"
+      "WebFetch"
     ]
   }
 }

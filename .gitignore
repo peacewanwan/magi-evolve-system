@@ -17,3 +17,6 @@ node_modules/
 *.bak
 *.tmp
 *.log
+
+# Claude Code worktrees (local only)
+.claude/worktrees/
