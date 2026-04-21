@@ -1,6 +1,7 @@
 {
   "permissions": {
     "allow": [
+      "Bash",
       "Read",
       "Write",
       "Edit",
@@ -8,28 +9,22 @@
       "Grep",
       "TodoWrite",
       "Agent",
-      "Bash(git *)",
-      "Bash(gh *)",
-      "Bash(ls *)",
-      "Bash(mkdir *)",
-      "Bash(cp *)",
-      "Bash(mv *)",
-      "Bash(rm *)",
-      "Bash(cat *)",
-      "Bash(echo *)",
-      "Bash(find *)",
-      "Bash(cd *)",
-      "Bash(pwd)",
-      "Bash(touch *)",
-      "Bash(npm *)",
-      "Bash(npx *)",
-      "Bash(wc *)",
-      "Bash(head *)",
-      "Bash(tail *)",
-      "Bash(rsync *)",
-      "Bash(open *)",
       "WebSearch",
-      "WebFetch"
+      "WebFetch",
+      "mcp__Claude_Preview__preview_screenshot",
+      "mcp__Claude_Preview__preview_console_logs",
+      "mcp__Claude_Preview__preview_logs",
+      "mcp__Claude_Preview__preview_snapshot",
+      "mcp__Claude_Preview__preview_inspect",
+      "mcp__Claude_Preview__preview_network",
+      "mcp__Claude_Preview__preview_list"
+    ],
+    "deny": [
+      "Bash(sudo *)",
+      "Bash(curl * | sh*)",
+      "Bash(curl * | bash*)",
+      "Bash(wget * | sh*)",
+      "Bash(wget * | bash*)"
     ]
   }
 }
