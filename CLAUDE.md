@@ -1,5 +1,34 @@
 # MAGI EVOLVE SYSTEM — note記事生成パイプライン
 
+## 作業開始前に必ず読むこと
+
+以下を順番に実行してから着手:
+
+1. **セッション引き継ぎの読込**
+   - 下記「セッション引き継ぎ」セクション + 共通仕様書 `_handoffs/README.md` に従う
+   - `_handoffs/handoff-magi-*.md` の最新（自リポ分）
+   - `_handoffs/handoff-eventmap-*.md` の最新（event-map 側分）
+   - 他リポ側に自リポの作業方針に影響する変更があれば1行報告
+
+2. **初回セットアップチェック**
+   - 必須ファイル（`NOTE_CONCEPT.md` / `STYLE_GUIDE.md` / `voice_profile.md`）が欠けていたら下記「初回セットアップ（オンボーディング）」発火
+
+## セッション終了時に必ず書くこと
+
+以下のトリガー文言で handoff 作成が発火:
+
+- 「引き継いで」「引き継ぎ作って」「引き継ぎお願い」「引き継ぎよろしく」
+- 「セッション切り替える（から引き継いで）」
+- 「ハンドオフ作って」「handoff 作成」
+
+handoff MD を `_handoffs/handoff-magi-YYYY-MM-DD-HHMM-{descriptor}.md` に作成する。
+
+詳細は下記「セッション引き継ぎ」セクション + 共通仕様書 `_handoffs/README.md` を参照。
+
+曖昧なケース（話題として出ただけ等）は「ハンドオフ MD を作成しますか？」と1行確認してから発火する。
+
+---
+
 ## 初回セットアップ（オンボーディング）
 
 **このセクションはClaude Codeが最初に読む。以下の条件に該当する場合、他の作業より先にオンボーディングを実行すること。**
@@ -423,72 +452,92 @@ claude
 
 ---
 
-## セッション切替手順
+## セッション引き継ぎ
 
-### 終了時（現セッション）
-1. **必須ファイルの存在・整合性チェック**:
-   - `NOTE_CONCEPT.md` — セッション中の変更（番号変更、公開状態）が反映されているか
-   - `STYLE_GUIDE.md` — 存在するか
-   - `voice_profile.md` — 存在するか。セッション中に発見した声の特徴があれば追記
-   - `voice-patterns.md` — セッション中に発見したパターンが追記されているか
-   - `knowledge-base/` — シンボリックリンクが有効か
-   - `series-plan.md` — セッション中の構成変更が反映されているか
-   - **欠けているファイルがあればハンドオフ前に作成・修正する**
-2. **未コミットの変更をすべてコミット**
-3. **リモートにプッシュ**（worktreeブランチ + mainにマージ）
-4. **Obsidianに必要ファイルをコピー**
-   - コピー先: `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/ObsidianVault/24offmap/NotePublishing/`
-   - 対象: Output/, Drafts/, Ideas/, Calibration/, Published-Current/ の変更分
-5. **ハンドオフプロンプトを作成**
-   - `NotePublishing/Ideas/session-handoff-{日付}.md` に保存
-   - 内容: 現在の状態、完了した作業、未完了のタスク、次にやるべきこと、注意事項
+セッション引き継ぎの運用は **両リポ共通仕様書** `_handoffs/README.md` を参照すること:
 
-### 開始時（次のセッション）
-1. **必須ファイルの存在チェック**（オンボーディング条件）:
-   - `NOTE_CONCEPT.md` — 存在し、内容が最新か（番外編の番号、公開状況）
-   - `STYLE_GUIDE.md` — 存在し、中身があるか
-   - `voice_profile.md` — 存在し、中身があるか
-   - `knowledge-base/` — シンボリックリンクが有効か（`ls knowledge-base/` で確認）
-   - **1つでも欠けていたら、作業前に修正する**
-2. **ハンドオフプロンプトを読む**（前セッションの `session-handoff-{日付}.md`）
-3. **worktreeの状態を確認**: `git status`, `git log --oneline -10`
-4. **Published-Currentの内容を確認**: 最新の公開状況を把握
-5. **voice-patterns.mdを読む**: 学習済みパターンを把握（P-001〜）
-6. **series-plan.mdを読む**: 構成案の最新状態を把握
-7. **knowledge-base/のパーソナリティ情報を読む**: オーナーの人物像を把握
-
-### ハンドオフプロンプトのテンプレート
-
-```markdown
-# セッションハンドオフ — {日付}
-
-## 前セッションで完了した作業
-- （箇条書き）
-
-## 現在の状態
-- Published-Current: （最新の公開状況）
-- Drafts: （作業中のドラフト）
-- パイプライン: （進行中のステージがあれば）
-
-## 次にやるべきこと（優先順）
-1. （最優先タスク）
-2. ...
-
-## 注意事項・コンテキスト
-- （セッション中に判明した重要情報）
-- （オーナーの方針変更等）
-
-## 必須ファイル存在チェック（次セッション開始時に確認）
-- [ ] NOTE_CONCEPT.md — 内容が最新か
-- [ ] STYLE_GUIDE.md — 存在するか
-- [ ] voice_profile.md — 存在するか
-- [ ] voice-patterns.md — パターンが最新か
-- [ ] knowledge-base/ — シンボリックリンクが有効か
-- [ ] series-plan.md — 構成が最新か
-
-## 参照すべきファイル
-- （このセッションで更新した重要ファイルのパス）
 ```
+~/Library/Mobile Documents/iCloud~md~obsidian/Documents/ObsidianVault/24offmap/_handoffs/README.md
+```
+
+共通仕様書に記載されてる内容:
+- 保存場所・命名規則・frontmatter スキーマ
+- テンプレート骨格（共通セクション）
+- トリガー文言（発火条件）・曖昧時の確認フロー
+- 開始時の読込手順（自リポ → 他リポ → 差分報告）
+- 鮮度チェック（24h / 7日基準）
+- フォールバック（エラーで止まらず続行）
+- iCloud 同期遅延対策
+
+以下は **magi 側固有の運用**。共通仕様と併せて参照。
+
+### ファイル命名（magi 側）
+
+```
+handoff-magi-YYYY-MM-DD-HHMM-{descriptor}.md
+```
+
+保存先は共通仕様書記載の `_handoffs/` 直下。
+
+`{descriptor}` は共通辞書（`session-end` / `wip` / `pipeline-complete` / `article-published` / `draft-complete` / `review-pending` 等）から選ぶ。辞書にないケースは主題を3-5語・英小文字ハイフン区切りで自由命名。
+
+### magi 固有セクション（handoff MD の「各リポ固有セクション」に含める）
+
+共通セクション（完了した作業 / 現在の状態 / 次にやるべきこと / 注意事項・学び / 重要ファイル・パス）の後に、以下の magi 固有項目を含める:
+
+#### 1. 必須ファイル整合性チェック
+- `NOTE_CONCEPT.md` — シーズン構造・番号・公開状況が最新か
+- `STYLE_GUIDE.md` — 存在するか
+- `voice_profile.md` — 存在するか。セッション中に発見した声の特徴があれば追記
+- `voice-patterns.md` — セッション中に発見したパターンが追記されているか
+- `series-plan.md` — セッション中の構成変更が反映されているか
+- `knowledge-base/` — シンボリックリンクが有効か
+
+#### 2. シリーズ状態
+本編 / 番外編 / 特別編 それぞれについて、各記事の状態を把握:
+- 公開済
+- 下書き登録済（note.com 側）
+- 添削中
+- 構成案中
+- 未着手
+
+#### 3. voice-patterns.md の学習サイクル更新状況
+- セッション中に新パターン検出されたか
+- Calibrator 実行したか
+- P-XXX パターンの「観察 → 傾向 → 確定」昇格があったか
+
+#### 4. パイプライン通過状態
+並行進行中の記事それぞれについて、以下のどの段階にいるかを明記:
+```
+未着手 → 構想 → ドラフト → voice_check → editor → publisher → note下書き登録済 → 公開済
+```
+
+#### 5. 画像差し込みマーカーの状態
+オーナー手動差し込み待ちリスト（例: MLM比較ピラミッド図、情報商材定義スクショ等）。
+
+### 開始時の追加チェック（magi 固有）
+
+`_handoffs/README.md` 記載の共通読込手順に加えて:
+
+1. **パーソナリティ情報の読込** — `knowledge-base/` のパーソナリティ関連ファイルを読んでオーナー人物像を把握
+2. **Published-Current の内容確認** — 最新の公開状況を把握
+3. **voice-patterns.md の読込** — 学習済みパターンを把握（P-001〜）
+4. **series-plan.md の読込** — 構成案の最新状態を把握
+
+### 終了時の追加作業（magi 固有）
+
+`_handoffs/README.md` 記載の共通フロー（handoff 作成）に加えて:
+
+1. **必須ファイル整合性チェック**（上記「magi 固有セクション 1.」のリスト）→ 欠けていたら handoff 前に作成・修正
+2. **未コミット変更のコミット**（記事・Ideas・Drafts・Output/Published-Current の更新分）
+3. **リモートにプッシュ**（worktree ブランチ + main マージ）
+
+### 既存 handoff の扱い
+
+- `NotePublishing/Ideas/session-handoff-*.md`（5-6件）は**そのまま残す**
+- 理由: 参照している他ファイル（`series-plan.md` 等）からのリンク切れを避けるため
+- **新規分のみ** `_handoffs/` に出す
+- 一括移動 or OLD 化は後日の別タスク（急がない）
 
 ---
 
