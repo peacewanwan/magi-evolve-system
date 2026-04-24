@@ -5,10 +5,13 @@
 以下を順番に実行してから着手:
 
 1. **セッション引き継ぎの読込**
-   - 下記「セッション引き継ぎ」セクション + 共通仕様書 `_handoffs/README.md` に従う
+   - 下記「セッション引き継ぎ」セクション + 共通仕様書 `_handoffs/README.md`（v0.5、サイズ肥大化リマインド追加）に従う
    - `_handoffs/handoff-magi-*.md` の最新（自リポ分）
    - `_handoffs/handoff-eventmap-*.md` の最新（event-map 側分）
+   - `_handoffs/handoff-meta-*.md` の最新（meta 側分）
    - 他リポ側に自リポの作業方針に影響する変更があれば1行報告
+   - 読んだ handoff（自・他いずれも）に `## Codex メモ` セクションがあれば、1〜2 行で要約してユーザーに先に共有（v0.4 から）
+   - `_handoffs/` 直下サイズチェック：`ls -l _handoffs/handoff-*.md 2>/dev/null | awk '{sum+=$5} END {printf "%.2f MB (%d files)\n", sum/1024/1024, NR}'` で合計サイズ取得（`du` は iCloud 下で 0B 誤計測のため不可）、**5MB 超**ならユーザーに「N MB に達しています、古いものを archive に移動しますか？」と 1 行提案。5MB 未満はサイレント（v0.5 から）
 
 2. **初回セットアップチェック**
    - 必須ファイル（`NOTE_CONCEPT.md` / `STYLE_GUIDE.md` / `voice_profile.md`）が欠けていたら下記「初回セットアップ（オンボーディング）」発火
