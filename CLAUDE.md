@@ -584,5 +584,5 @@ Chat（claude.ai）側で `note-idea-*.md` として起票されたネタは、�
 
 - **出力ルール正本**: `knowledge-base/decisions/decision-2026-04-19-chat-md-output-rules.md`
 - **ウォッチャー全量**: `knowledge-base/knowledge/watcher-rules-current.md`
-- **symlink**: `ObsidianVault/magi` → `/Users/takeomba/LLMPJ/magi/NotePublishing/`（vault側から張る逆方向）
+- **symlink**: `ObsidianVault/magi` → `/Users/takeombp/LLMPJ/magi/NotePublishing/`（vault側から張る逆方向）
 - この連携により、Chatで「ネタとして起票して」→自動で `Ideas/` に着地する運用が成立
