@@ -318,16 +318,14 @@ publisher（投稿最適化）
 
 **フィードバックループ：** editor が REVISE 判定した場合、voice_checker に差し戻す（最大2回）
 
-### Obsidian スキル活用（任意）
+### 補助ツール
 
-Obsidianを使っている場合、以下のスキルで精度が上がります:
-
-| スキル | 活用箇所 |
-|--------|---------|
-| **obsidian-cli** | enricher: `obsidian search` でvault意味検索、`obsidian backlinks` で逆参照 |
-| **obsidian-markdown** | writer/editor: Obsidian記法で原稿作成（wikilink, frontmatter） |
-| **obsidian-bases** | pipeline.base: 全記事の進捗ダッシュボード |
-| **defuddle** | enricher: WebFetchの代わりにクリーンなWeb情報取得（トークン節約） |
+| ツール | 状態 | 活用箇所 |
+|--------|------|---------|
+| **defuddle** | ✅ 導入済 (`npm install -g defuddle`) | enricher: WebFetch の代わりにクリーンなWeb情報取得（トークン節約） |
+| **obsidian-cli** | ❌ 未導入（必要なら Yakitrak/obsidian-cli を brew tap で検討） | enricher の vault 検索は現状 Grep/Glob で代替（`knowledge-base/` + `vault-extras/` 走査） |
+| **obsidian-markdown** | — | writer/editor: Obsidian 記法（wikilink, frontmatter）はそのまま書ける（特別な CLI 不要） |
+| **obsidian-bases** | — | pipeline.base: 全記事の進捗ダッシュボード（Obsidian 内 Bases 機能） |
 
 ### 学習サイクル（calibrator）
 
@@ -388,9 +386,9 @@ cd ~/Projects/note-pipeline
 claude
 ```
 
-**必要なツール：**
-- Obsidian CLI（`obsidian` コマンド）— vault検索・ノート操作に使用（任意）
-- defuddle（`npm install -g defuddle`）— Web情報のクリーン取得に使用（任意）
+**補助ツール（任意）：**
+- defuddle（`npm install -g defuddle`）— Web情報のクリーン取得（トークン節約）。導入済
+- Obsidian CLI — 現状は未導入。vault 検索は Grep/Glob ベースで動作中。導入したい場合は Yakitrak/obsidian-cli (brew tap) + Obsidian Local REST API plugin が候補
 
 **初回：** `.claude/agents/` 配下のエージェント定義ファイルをすべて確認すること。
 

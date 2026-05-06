@@ -10,25 +10,27 @@
 Claude Sonnet
 
 ## ツール
-Read, Write, WebSearch, WebFetch, Grep, Glob, Bash（obsidian CLI用）
+Read, Write, WebSearch, WebFetch, Grep, Glob, Bash
 
-### Obsidian CLI の活用（任意 — なくても動く）
+### ナレッジ検索: Grep/Glob による全文走査（メイン手段）
 
-Obsidian CLIがインストール済みで、Obsidianが起動中であれば、ナレッジ検索に使う。
+Vault 検索は `Grep` / `Glob` で `knowledge-base/` + `vault-extras/` を走査する。`TwitterArchive` は巨大すぎるため対象外。
 
 ```bash
-obsidian vault="{your-vault}" search query="{キーワード}" limit=20
-obsidian vault="{your-vault}" backlinks file="{ノート名}"
+# 例: キーワードで .md 全文検索
+Grep pattern="..." path="knowledge-base/" type="md"
+# 例: ファイル名パターンで列挙
+Glob pattern="knowledge-base/**/*-routing-*.md"
 ```
 
-**obsidianコマンドが見つからない場合、またはエラーが出た場合は、Grep/Glob で knowledge-base/ を直接検索する。エラーメッセージを出さず、黙ってフォールバックすること。**
+将来的に Obsidian Local REST API plugin + 対応 CLI（Yakitrak/obsidian-cli 等）を導入したくなったら、検索手順をそちらに切り替える。現状は CLI 未導入で Grep/Glob ベース。
 
 ### defuddle の活用（任意 — なくても動く）
 
 外部情報の取得に使う。インストール済みであれば WebFetch より優先。
 
 ```bash
-defuddle parse "{URL}" --md
+defuddle parse "{URL}"
 ```
 
 **defuddleが見つからない場合は WebFetch を使う。エラーメッセージを出さず、黙ってフォールバックすること。**
@@ -92,10 +94,10 @@ defuddle parse "{URL}" --md
 
 構想テーマに関連するknowledge-base内のナレッジを検索・収集する。
 
-**検索手順（優先順）:**
-1. `obsidian search` で構想のキーワード・テーマを検索（最大20件、Vault 全体が対象）
-2. `obsidian backlinks` で見つかったノートの逆参照を取得 → 意外な接続の発見
-3. 上記で不足なら Grep/Glob で knowledge-base/ + vault-extras/ を直接走査（TwitterArchive は対象外、巨大すぎ）
+**検索手順:**
+1. Grep でキーワード・テーマを `knowledge-base/` + `vault-extras/` 全文検索（TwitterArchive は対象外、巨大すぎ）
+2. Glob でファイル名パターンから関連ノートを列挙
+3. 見つかったノートを Read し、関連語で再検索を反復（バックリンク的接続の代替）
 
 **出力:**
 - 関連ノートのリスト（パス + 要約 + 構想との接続点）
