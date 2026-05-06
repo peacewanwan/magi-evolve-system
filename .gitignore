@@ -23,3 +23,6 @@ node_modules/
 
 # handoffs symlink → Obsidian Vault（共通仕様書 v0.3）
 _handoffs
+
+# vault-extras symlinks → ObsidianVault sibling folders（個別環境）
+vault-extras/

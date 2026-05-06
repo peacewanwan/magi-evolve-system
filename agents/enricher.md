@@ -36,7 +36,8 @@ defuddle parse "{URL}" --md
 ## 入力
 - NotePublishing/Ideas/{構想ファイル}.md
 - NOTE_CONCEPT.md（アカウントの文脈）
-- knowledge-base/（ナレッジベース — 読み取り専用）
+- knowledge-base/（ナレッジベース、24offmap vault — 読み取り専用）
+- vault-extras/（Vault sibling folders: personal/MOC/Analysis/LLM-Chats/_inbox — 読み取り専用）
 - NotePublishing/Calibration/voice-patterns.md（あれば）
 
 ## 出力
@@ -47,10 +48,11 @@ defuddle parse "{URL}" --md
 構想ファイルを読んだ直後に、以下の2つを評価する:
 
 ### 一次データの積極的な検索
-構想の主張を裏付ける一次データを knowledge-base 内から積極的に探す。具体的には:
-- 個人的なメトリクスやデータ
-- 個人的エピソード（SNS投稿、他者からの反応、具体的な出来事）
+構想の主張を裏付ける一次データを knowledge-base/ + vault-extras/ から積極的に探す。具体的には:
+- 個人的なメトリクスやデータ（knowledge-base/, vault-extras/personal/, vault-extras/_inbox/）
+- 個人的エピソード（SNS投稿、他者からの反応、具体的な出来事 — vault-extras/LLM-Chats/, vault-extras/_inbox/, knowledge-base/chats/）
 - 具体的な数字と日付（いつ何をしたか、どのくらいの期間か）
+- メタ分析・横断的視点（vault-extras/Analysis/, vault-extras/MOC/）
 
 これらは構想に書かれていなくても、記事の説得力を大幅に上げる素材になる。writerへの推奨セクションで明示的に渡す。
 
@@ -91,9 +93,9 @@ defuddle parse "{URL}" --md
 構想テーマに関連するknowledge-base内のナレッジを検索・収集する。
 
 **検索手順（優先順）:**
-1. `obsidian search` で構想のキーワード・テーマを検索（最大20件）
+1. `obsidian search` で構想のキーワード・テーマを検索（最大20件、Vault 全体が対象）
 2. `obsidian backlinks` で見つかったノートの逆参照を取得 → 意外な接続の発見
-3. 上記で不足なら Grep/Glob で knowledge-base/ を直接走査
+3. 上記で不足なら Grep/Glob で knowledge-base/ + vault-extras/ を直接走査（TwitterArchive は対象外、巨大すぎ）
 
 **出力:**
 - 関連ノートのリスト（パス + 要約 + 構想との接続点）
@@ -181,7 +183,7 @@ date: {日付}
 
 ## 重要な制約
 
-- knowledge-base/ への書き込み禁止（NotePublishing/ へのコピーのみ許可）
+- knowledge-base/ + vault-extras/ への書き込み禁止（NotePublishing/ へのコピーのみ許可）
 - 外部情報の出典を**必ず**明記する。出典なしの情報は使わない
 - {OWNER}の記憶が間違っていた場合、隠さず報告する
 - 裏付けが見つからない場合は正直に「見つからなかった」と書く

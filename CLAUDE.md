@@ -193,6 +193,24 @@ note-pipeline/
 - `voice-patterns.md` — 「学習済みパターン」（AIがやりがちなミスの蓄積）
 - `knowledge-base/` — 「人格」（何を思考するか、価値観・経験）
 
+### vault-extras/ — ObsidianVault sibling folders
+
+`knowledge-base/` は ObsidianVault 内 `24offmap/` のみを指す。同じ Vault 内の **sibling folder**（24offmap の外、Vault root 直下）も enricher / writer の参照対象にしたいため、`vault-extras/` 経由で個別 symlink を張っている（`.gitignore` 対象、機体ごとに張り直し）。
+
+| symlink | 中身 | 用途 |
+|---|---|---|
+| `vault-extras/personal/` | AI活用 / 投資 / 車バイク趣味 等 | オーナー個人の関心領域。記事の「人物像」補強に使う |
+| `vault-extras/MOC/` | 24offmap開発 / AI活用メタ / Claude一覧 等 | Map of Content。横断的に何があるか俯瞰したい時 |
+| `vault-extras/Analysis/` | AI使い分け分析 / Xアーカイブ人物分析 等 | メタ分析。記事ネタの裏付け |
+| `vault-extras/LLM-Chats/` | Claude / 他LLM チャット履歴 | 一次素材。enricher が具体エピソードを拾う時 |
+| `vault-extras/_inbox/` | voice メモ / 一次受け | voice memo pipeline の出力先、ネタ発掘 |
+
+**含まれていないもの:**
+- `TwitterArchive/`（14000+ files、巨大すぎ）— 必要時のみ絶対パスで `~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/ObsidianVault/TwitterArchive/` 参照
+- `magi/`（Vault 内 symlink、自分への逆参照で循環）
+
+**書き込みルール**: vault-extras/ 配下も `knowledge-base/` と同じく**書き込み禁止**（参照のみ）。
+
 <!--
 設計メモ: なぜこの5つを分離しているか
 → 役割ごとに参照するエージェントが違う。
