@@ -1,5 +1,5 @@
 ---
-title: "【劣化した脳をAIで補完する話(1)】Obsidianを入れたら机の上が散らからなくなった"
+title: "【劣化した脳をAIで補完】なぜobsidianを選んだのか"
 type: 3
 status: draft
 created: 2026-05-02
@@ -10,7 +10,7 @@ source_notes:
   - knowledge-base/chats/2026-04-02_複数のAIチャット履歴をObsidianで一元管理.md
 ---
 
-# Obsidianを入れたら机の上が散らからなくなった
+# なぜobsidianを選んだのか
 
 ## きっかけは釣り仲間が使ってたから
 
