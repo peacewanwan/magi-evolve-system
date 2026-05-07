@@ -10,7 +10,7 @@ source_notes:
   - knowledge-base/chats/2026-04-02_複数のAIチャット履歴をObsidianで一元管理.md
 ---
 
-# なぜobsidianを選んだのか
+# 【劣化した脳をAIで補完】なぜobsidianを選んだのか
 
 ## きっかけは釣り仲間が使ってたから
 
