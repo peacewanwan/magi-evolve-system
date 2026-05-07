@@ -1,7 +1,7 @@
 ---
 title: "【劣化した脳をAIで補完】なぜobsidianを選んだのか"
 type: 3
-status: published-ready
+status: note-draft-submitted
 created: 2026-05-02
 edited: 2026-05-07
 source_notes:
