@@ -146,45 +146,50 @@ note-pipeline/
 │   │   └── publish.md         … パイプライン実行コマンド
 │   └── settings.json
 ├── templates/                 … 記事型テンプレ（型1/2/3）
-├── output-backup/             … 完成原稿のローカルバックアップ（正本はknowledge-base側）
+├── output-backup/             … 完成原稿のローカルバックアップ（正本は Vault/note 側）
 ├── archive/                   … NG例・旧パイプライン成果物
 │   └── ng-examples/           … 過去のNG記事（品質改善の参照用）
-└── knowledge-base/            … ナレッジベース（Obsidian vault等）
-    └── NotePublishing/        … note記事制作の親フォルダ
-        ├── Ideas/             … 構想置き場（オーナーが書く。パイプラインの起点）
+└── knowledge-base/            … Vault root への symlink（ObsidianVault/ 全体）
+    ├── 24offmap/              … 既存ナレッジ（_handoffs/, decisions/, ideas/, knowledge/, sessions/, chats/ 等）
+    └── note/                  … note記事制作の正本（全データ）
+        ├── Ideas/             … 構想置き場（オーナー or watcher 着地）
         │   └── _template.md   … 構想テンプレート
         ├── Output/            … 完成原稿（正本。1記事=1フォルダ）
         │   └── {日付}-{タイトル}/
         │       ├── {日付}-{タイトル}.md
         │       └── {日付}-{タイトル}_meta.md
         ├── Drafts/            … 中間生成物（1記事=1フォルダ）
-        │   ├── {日付}-{タイトル}/
-        │   │   ├── enriched-{日付}-{タイトル}.md
-        │   │   ├── draft-{日付}-{タイトル}.md
-        │   │   ├── voice-checked-{日付}-{タイトル}.md
-        │   │   ├── voice-report-{日付}-{タイトル}.md
-        │   │   └── editor-review-{日付}-{タイトル}.md
-        │   └── ng-examples/   … NG記事アーカイブ
+        │   └── {日付}-{タイトル}/
+        │       ├── enriched-*.md
+        │       ├── draft-*.md
+        │       ├── voice-checked-*.md
+        │       ├── voice-report-*.md
+        │       └── editor-review-*.md
+        ├── Published-Current/ … 公開済記事の現行版（オーナー手直し後の note 公開版）
         ├── Calibration/       … 学習サイクル用
         │   ├── voice-patterns.md  … AI vs オーナーの乖離パターン集
         │   ├── ok/            … オーナーが手直しした最終版
         │   └── diff/          … AIドラフト vs 最終版の差分記録
-        └── pipeline.base      … パイプラインダッシュボード（Obsidian Bases / 任意）
+        └── OLD/                … 過去アーカイブ（ng-examples 等）
 ```
+
+**重要**: LLMPJ/magi/ 直下に `NotePublishing/` を置かない。Vault/note/ が唯一の正本（2026-05-08 統合済）。
 
 ## knowledge-base/ の位置づけ
 
-**ナレッジベースへの参照（基本は書き込み禁止）**
+**Vault root への symlink — `knowledge-base/` = `ObsidianVault/`**
+
+`magi/knowledge-base/` は Obsidian の Vault root 全体への symlink（2026-05-08 から）。配下に `24offmap/`（既存ナレッジ）と `note/`（note執筆データ）が並列で存在する。
 
 このワークスペースから knowledge-base/ を参照する際の役割：
-1. **ネタ帳** — ナレッジノートから記事の素材を抽出
+1. **ネタ帳** — `knowledge-base/24offmap/`, `vault-extras/` 配下のナレッジノートから記事素材を抽出
 2. **パーソナリティDB** — パーソナリティ情報から「オーナーという人間」を再現
-3. **参照のみ** — knowledge-base/ への書き込みは行わない（ナレッジベース側で精製された情報のみを読む）
+3. **note 制作正本** — `knowledge-base/note/` 配下が note 記事制作の唯一の正本
 
-**例外：`knowledge-base/NotePublishing/` への書き込みは許可**
-- NotePublishing/ 配下は記事制作の作業領域として全サブフォルダへの書き込みを許可
-- Ideas/, Output/, Drafts/, Calibration/ への書き込みはパイプラインの正常動作に必要
-- 既存ナレッジへの書き込みは引き続き禁止
+**書き込みルール:**
+- **`knowledge-base/note/` 配下は書き込み許可**（Ideas/Drafts/Output/Published-Current/Calibration 全て）
+- **`knowledge-base/24offmap/_handoffs/` は書き込み許可**（handoff 作成）
+- **その他の既存ナレッジ（`knowledge-base/24offmap/knowledge/`, `decisions/`, `ideas/` 等）は書き込み禁止**（参照のみ）
 
 **関連ファイルの位置づけ：**
 - `NOTE_CONCEPT.md` — 「文脈」（アカウント全体のコンセプト、発信の軸、記事の位置づけ）
@@ -193,9 +198,9 @@ note-pipeline/
 - `voice-patterns.md` — 「学習済みパターン」（AIがやりがちなミスの蓄積）
 - `knowledge-base/` — 「人格」（何を思考するか、価値観・経験）
 
-### vault-extras/ — ObsidianVault sibling folders
+### vault-extras/ — レガシー（2026-05-08 以降は不要に近い）
 
-`knowledge-base/` は ObsidianVault 内 `24offmap/` のみを指す。同じ Vault 内の **sibling folder**（24offmap の外、Vault root 直下）も enricher / writer の参照対象にしたいため、`vault-extras/` 経由で個別 symlink を張っている（`.gitignore` 対象、機体ごとに張り直し）。
+`knowledge-base/` を Vault root に張り替えた（2026-05-08）ことで、sibling folder（personal / MOC / Analysis / LLM Chats / _inbox 等）は `knowledge-base/` 経由で直接見えるようになった。`vault-extras/` の symlink 群は重複しているが、enricher/writer の既存参照パスを壊さないため当面残置（`.gitignore` 対象、機体ごとに張り直し）。
 
 | symlink | 中身 | 用途 |
 |---|---|---|
@@ -395,8 +400,9 @@ claude
 ## 制約・必須ルール
 
 ### knowledge-base/ への書き込みルール
-- **基本：書き込み禁止** — ナレッジノートへの書き込みは禁止
-- **例外：NotePublishing/ 配下は全て書き込み許可**（Ideas/, Output/, Drafts/, Calibration/）
+- **基本：書き込み禁止** — `knowledge-base/24offmap/knowledge/`, `decisions/`, `ideas/` 等の既存ナレッジへは書かない
+- **例外1：`knowledge-base/note/` 配下は全て書き込み許可**（Ideas/, Output/, Drafts/, Published-Current/, Calibration/）
+- **例外2：`knowledge-base/24offmap/_handoffs/` は書き込み許可**（handoff 作成）
 
 ### 一次情報の必須性
 - 体験していない、実測していない、判断していないテーマは記事化しない
@@ -405,7 +411,7 @@ claude
 
 ### 投稿フロー
 - note.com に公式APIなし
-- `knowledge-base/NotePublishing/Output/{記事フォルダ}/` に完成原稿を出力（正本）
+- `knowledge-base/note/Output/{記事フォルダ}/` に完成原稿を出力（正本）
 - `output-backup/` にローカルバックアップ
 - オーナーが手直し後、note.com に手動でコピペ投稿
 - 投稿後、手直し版を `Calibration/ok/` に保存し `/publish --calibrate` で学習
@@ -483,7 +489,7 @@ claude
 | 章1 | Obsidian導入 | 取材待ち（chats/2026-04-02 + JONIさん経緯） |
 | 章2〜13 | 構造確定 | Ideas起票未（`series-structure.md` 参照） |
 
-詳細: `knowledge-base/NotePublishing/Ideas/2026-04-30-second-brain-series-structure.md`
+詳細: `knowledge-base/note/Ideas/2026-04-30-second-brain-series-structure.md`
 
 ### シーズン構造（本編1）
 - **シーズン1** (1)〜(6): 概念編（AI使い分け、考え方、壁打ち）— 公開済み
@@ -502,14 +508,14 @@ claude
 ストック枯渇状態。失敗02 か 第二の脳章1 のどちらかで繋ぐ。
 
 ### 構成案（仮番）
-`NotePublishing/Ideas/series-plan.md` に詳細あり（**4塊フレームワーク + 第二の脳詳細は未追記、要メンテ**）。(18)以降は仮番で、途中分割あり得る。最終回は決めない。
+`knowledge-base/note/Ideas/series-plan.md` に詳細あり（**4塊フレームワーク + 第二の脳詳細は未追記、要メンテ**）。(18)以降は仮番で、途中分割あり得る。最終回は決めない。
 
 ### 第二の脳シリーズ詳細
 - **構成**: 章0（先に完成形）+ 章1〜n（時系列） / 80,000〜130,000字 + 章0 4,000〜5,000字
 - **ペース**: 週1〜2本（毎日公開はしない）
 - **オーナー方針**: シリーズ名は公開直前まで仮で OK / 項番にギリシャ文字使うな / 各章は密度優先 / 微修正前提
 - **塊2（外出し小ネタ候補）**: B 掟 / F 音声メモ / D 引越し大工事 / E 設計シンプル運用複雑 / A 見落とし / C ダッシュボード（独立単発、シリーズ外）
-- 詳細: `knowledge-base/NotePublishing/Ideas/2026-04-30-second-brain-series-structure.md` / `knowledge-base/未分類MD/2026-04-23-note-series-reorganized.md`
+- 詳細: `knowledge-base/note/Ideas/2026-04-30-second-brain-series-structure.md` / `knowledge-base/24offmap/未分類MD/2026-04-23-note-series-reorganized.md`
 
 ### 分割履歴
 - (16): 旧版「公開したのに誰も来ない」を**前半（技術対応）/後半（戦略・命名）** に分割
@@ -608,7 +614,7 @@ handoff-magi-YYYY-MM-DD-HHMM-{descriptor}.md
 
 ### 既存 handoff の扱い
 
-- `NotePublishing/Ideas/session-handoff-*.md`（5-6件）は**そのまま残す**
+- `knowledge-base/note/Ideas/session-handoff-*.md`（5-6件）は**そのまま残す**
 - 理由: 参照している他ファイル（`series-plan.md` 等）からのリンク切れを避けるため
 - **新規分のみ** `_handoffs/` に出す
 - 一括移動 or OLD 化は後日の別タスク（急がない）
@@ -621,15 +627,16 @@ handoff-magi-YYYY-MM-DD-HHMM-{descriptor}.md
 - `STYLE_GUIDE.md` — 文体・ルール・禁止表現
 - `voice_profile.md` — 発言パターン分析
 - `voice-patterns.md` — AI vs オーナーの乖離パターン集（Calibration/配下）
-- `NotePublishing/Ideas/series-plan.md` — シリーズ構成案・ネタ候補
+- `knowledge-base/note/Ideas/series-plan.md` — シリーズ構成案・ネタ候補
 - `.claude/agents/*.md` — 各エージェントの詳細プロンプト
 - `.claude/commands/publish.md` — パイプライン実行コマンド
 
-## Chat側MD自動振り分け連携（2026-04-19）
+## Chat側MD自動振り分け連携（2026-04-19 起源、2026-05-08 着地先変更）
 
-Chat（claude.ai）側で `note-idea-*.md` として起票されたネタは、ダウンロード後にウォッチャーが自動で `NotePublishing/Ideas/` に流し込む（`ObsidianVault/magi` symlink経由）。
+Chat（claude.ai）側で `note-idea-*.md` として起票されたネタは、ダウンロード後にウォッチャーが自動で `Vault/note/Ideas/` に直接着地させる。
 
-- **出力ルール正本**: `knowledge-base/decisions/decision-2026-04-19-chat-md-output-rules.md`
-- **ウォッチャー全量**: `knowledge-base/knowledge/watcher-rules-current.md`
-- **symlink**: `ObsidianVault/magi` → `/Users/takeombp/LLMPJ/magi/NotePublishing/`（vault側から張る逆方向）
+- **出力ルール正本**: `knowledge-base/24offmap/decisions/decision-2026-04-19-chat-md-output-rules.md`
+- **ウォッチャー全量**: `knowledge-base/24offmap/knowledge/watcher-rules-current.md`
+- **着地先**: `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/ObsidianVault/note/Ideas/`（直接書き込み、symlink 経由なし）
+- 関連 watcher: `~/scripts/watch_icloud_md.sh`, `~/scripts/watch_session_summary.sh`（`MAGI_IDEAS_DIR="$VAULT/note/Ideas"`）
 - この連携により、Chatで「ネタとして起票して」→自動で `Ideas/` に着地する運用が成立
