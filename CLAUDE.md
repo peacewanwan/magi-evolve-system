@@ -414,7 +414,9 @@ claude
 - `knowledge-base/note/Output/{記事フォルダ}/` に完成原稿を出力（正本）
 - `output-backup/` にローカルバックアップ
 - オーナーが手直し後、note.com に手動でコピペ投稿
-- 投稿後、手直し版を `Calibration/ok/` に保存し `/publish --calibrate` で学習
+- 投稿後、手直し版を `knowledge-base/note/Published-Current/{記事タイトル}.md` に保存
+- 同時に `Calibration/ok/` にコピーし `/publish --calibrate` で学習
+- **Published-Current/ への反映と同時に、対応する `Drafts/{記事フォルダ}/` と `Output/{記事フォルダ}/` を `OLD/Drafts/` と `OLD/Output/` に移動**（Drafts/Output は未公開のみを保持する運用）
 
 ## 作業フロー
 
@@ -430,7 +432,8 @@ claude
 10. PUBLISH → publisher で投稿最適化（タイトル・装飾・タグ・画像プロンプト）
 11. Output/ + output-backup/ に出力。REVISE → voice_checker 差し戻し
 12. オーナーが手直し → note.com 投稿
-13. `/publish --calibrate` で学習サイクル
+13. 公開版を `Published-Current/` に反映 + 対応する `Drafts/{記事}/` と `Output/{記事}/` を `OLD/Drafts/` `OLD/Output/` に移動
+14. `/publish --calibrate` で学習サイクル
 
 ## シリーズ現状（2026-05-01時点）
 
