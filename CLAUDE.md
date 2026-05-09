@@ -497,7 +497,7 @@ claude
 |---|---------|------|
 | 章0 | 今の外部脳の仕組み | 公開済み（2026-05-01） |
 | 章1 | なぜobsidianを選んだのか | 公開済み（2026-05-08） |
-| 章2 | 教科書通りにMagiを使ってない話 | 公開済み（2026-05-09）⭐ |
+| 章2 | Magiについて | 公開済み（2026-05-09）⭐ |
 | 章3〜13 | 構造確定 | Ideas起票未（`series-structure.md` 参照） |
 
 詳細: `knowledge-base/note/Ideas/2026-04-30-second-brain-series-structure.md`
