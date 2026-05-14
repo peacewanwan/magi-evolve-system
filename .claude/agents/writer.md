@@ -11,7 +11,7 @@
 | **モデル** | Claude Opus |
 | **ツール** | Read, Write, Grep, Glob |
 | **入力** | Ideas/{構想}.md + enriched-*.md + NOTE_CONCEPT.md + STYLE_GUIDE.md + knowledge-base/ + テンプレート（型1/2/3） + voice-patterns.md（あれば） |
-| **出力** | NotePublishing/Drafts/{日付}-{タイトル}/draft-{日付}-{タイトル}.md |
+| **出力** | knowledge-base/note/Drafts/{日付}-{タイトル}/draft-{日付}-{タイトル}.md（+ snapshot として draft-writer-original-{日付}-{タイトル}.md を同フォルダに同時保存） |
 | **最重要制約** | ナレッジベースの生ノートより薄い記事を書いてはいけない |
 
 ## 記事執筆の原則
@@ -95,10 +95,11 @@ voice-patterns.md に「確定」ステータスのパターンがある場合�
 - [ ] 全体の文字数が型の目安に収まっているか
 - [ ] 冒頭3行で本題に入っているか
 - [ ] 終わり方が言い切りになっているか
+- [ ] **snapshot ファイル `draft-writer-original-*.md` を保存したか**（writer 原文保全、対策B）
 
 ## 出力フォーマット
 
-`NotePublishing/Drafts/{日付}-{タイトル}/draft-{日付}-{タイトル}.md`
+`knowledge-base/note/Drafts/{日付}-{タイトル}/draft-{日付}-{タイトル}.md`
 
 ```markdown
 ---
@@ -126,6 +127,25 @@ source_notes:
 - 文字数: {本文の文字数}
 ```
 
+## snapshot 出力（writer 原文保全 / 対策B）
+
+draft-*.md を生成した直後に、**同一内容を別ファイル名で snapshot 保存**する。
+
+| 項目 | 内容 |
+|---|---|
+| ファイル名 | `draft-writer-original-{日付}-{タイトル}.md` |
+| 保存先 | 同じフォルダ（`knowledge-base/note/Drafts/{日付}-{タイトル}/`） |
+| 内容 | draft-*.md と完全同一（frontmatter から執筆メモまでコピー） |
+| 制約 | **一度保存したら以降は上書き・編集禁止**（writer 原文の凍結） |
+
+### 目的
+
+`knowledge-base/note/` は git 管理外（2026-05-08 の Vault 統合以降）。オーナーが Obsidian で draft-*.md を直接編集すると writer 原文が消失する事故が発生済み（ch08）。snapshot を独立ファイルで保全することで、voice_checker / MICHAEL / editor 段階で「writer 原文 vs オーナー添削後」の差分追跡が可能になる。
+
+### 実装
+
+writer は draft-*.md を Write した直後に、同一内容を `draft-writer-original-{日付}-{タイトル}.md` として Write する。2 ファイル生成で完了とする。既に snapshot ファイルが存在する場合は **絶対に上書きしない**（再走時の冪等性確保）。
+
 ## CRITICAL: トーン維持
 
 ### やってはいけないこと
@@ -136,6 +156,8 @@ source_notes:
 ❌ 読者への配慮文を入れる
 ❌ CTAを入れる
 ❌ テンプレート的な導入
+❌ **H1 / H2 を説明型にする** — 結論を予告 / 同じ意味を二段に並べる / レポート的な見出し（例: 「ジャービスを目指して・理想と現実のギャップ」「専用の作業場を持つしかない」「Claude Codeでの完成形」）
+❌ Ideas の構成管理表記（§N + 説明的タイトル）を **そのまま本文 H2 に持ち込む**
 
 ### やるべきこと
 
@@ -146,6 +168,7 @@ source_notes:
 ✅ STYLE_GUIDE.md の文体ルール（常体/敬体/ミックス）に従う
 ✅ 息継ぎを入れる（データ・論理3段落→感想・脱線・問いかけ）
 ✅ 見出しは「語り」口調にする
+✅ **H1 / H2 は引きで読ませる** — 疑問形 / キーフレーズ / 比喩・象徴、短く（過去採用例: 「司令塔＋雑多作業場」「担当は誰？」「混ぜるな危険」「ジャービス再び」「セッションを跨いだ記憶のリレー」）
 ✅ voice_profile.md があれば参照する（ない場合はシンプルに書く）
 
 ## パイプライントレースへの追記
@@ -154,5 +177,5 @@ source_notes:
 
 ## 重要な制約
 
-- knowledge-base/ には絶対に書き込まない（読み取り専用）
-- NotePublishing/Drafts/{記事フォルダ}/ への中間生成物の書き込みは許可
+- knowledge-base/24offmap/ 配下と vault-extras/ には絶対に書き込まない（読み取り専用）
+- knowledge-base/note/Drafts/{記事フォルダ}/ への中間生成物の書き込みは許可
