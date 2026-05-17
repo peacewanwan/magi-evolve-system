@@ -399,24 +399,30 @@ claude
 
 ## 制約・必須ルール
 
-### knowledge-base/ への書き込みルール
-- **基本：書き込み禁止** — `knowledge-base/24offmap/knowledge/`, `decisions/`, `ideas/` 等の既存ナレッジへは書かない
-- **例外1：`knowledge-base/note/` 配下は全て書き込み許可**（Ideas/, Output/, Drafts/, Published-Current/, Calibration/）
-- **例外2：`knowledge-base/24offmap/_handoffs/` は書き込み許可**（handoff 作成）
+### agent 共通ルール（SSoT）
 
-### 一次情報の必須性
+全 agent の絶対遵守ルールは **`.claude/agent-rules/common-rules.md`** に集約。SSoT として参照すること。以下はすべて common-rules.md に集約済:
+
+- knowledge-base/ 書き込みルール（B-11）
+- aspirational 記述禁止（A-3）
+- Claude Code 表記（A-1）
+- 章N 呼称排除（B-2）
+- 日付時刻禁止（A-2）
+- オーナー voice 死守（B-1）
+- 説明型 H1/H2 禁止（B-3）
+- snapshot 工程（C-W）
+- ほか合計 21 ルール（A 6 件 / B 11 件 / C 役割別 4 区分）
+
+各 agent.md は冒頭に common-rules.md 必読の参照を持つ（AZRAEL / MES 発散層 MELCHIOR/BALTHASAR/CASPAR は除外、バイアス排除のため）。
+
+### 一次情報の必須性（プロジェクト原則）
+
 - 体験していない、実測していない、判断していないテーマは記事化しない
 - AIが書いた汎用的な解説記事を量産しない
 - 「自分だけが言えることは何か」を常に問う
 
-### 実装記述ルール — aspirational を書かない
-- ツール・コマンド・機能・運用フローの記述は**現時点で実在し動いているものだけ**書く
-- 「将来こうしたい」「こうなってると便利」は明示ラベル付きで隔離（「将来候補」「構想」等の節を別建て）
-- 過去の事故例: `obsidian-cli` の `obsidian search` / `obsidian backlinks` が CLAUDE.md と enricher.md に書かれていたが**実装ゼロ**だった（2026-05-08 発覚、Grep/Glob ベースに書き換え済）
-- 対象範囲: CLAUDE.md / agent 定義（`.claude/agents/*.md`）/ 各種 rules ファイル / 記事本文すべて
-- チェック: 新しいツール・コマンドを記述する時は「実際に実行・利用した形跡があるか」を確認。形跡がなければ書かない or 「未実装・将来候補」ラベルを付ける
-
 ### 投稿フロー
+
 - note.com に公式APIなし
 - `knowledge-base/note/Output/{記事フォルダ}/` に完成原稿を出力（正本）
 - `output-backup/` にローカルバックアップ
