@@ -5,7 +5,7 @@
 以下を順番に実行してから着手:
 
 1. **セッション引き継ぎの読込**
-   - 下記「セッション引き継ぎ」セクション + 共通仕様書 `_handoffs/README.md`（v0.5、サイズ肥大化リマインド追加）に従う
+   - 下記「セッション引き継ぎ」セクション + 共通仕様書 `_handoffs/README.md`（v0.7、現状スナップショット必須 + 注意事項は新規発見のみ）に従う
    - `_handoffs/handoff-magi-*.md` の最新（自リポ分）
    - `_handoffs/handoff-eventmap-*.md` の最新（event-map 側分）
    - `_handoffs/handoff-meta-*.md` の最新（meta 側分）
@@ -582,7 +582,7 @@ handoff-magi-YYYY-MM-DD-HHMM-{descriptor}.md
 
 ### magi 固有セクション（handoff MD の「各リポ固有セクション」に含める）
 
-共通セクション（完了した作業 / 現在の状態 / 次にやるべきこと / 注意事項・学び / 重要ファイル・パス）の後に、以下の magi 固有項目を含める:
+共通セクション（v0.7：**現状スナップショット** / 完了した作業 / 現在の状態 / 次にやるべきこと / 注意事項・学び【**新規発見のみ**、既知ルールは common-rules.md / memory feedback / README 参照で済ます】/ 重要ファイル・パス）の後に、以下の magi 固有項目を含める:
 
 #### 1. 必須ファイル整合性チェック
 - `NOTE_CONCEPT.md` — シーズン構造・番号・公開状況が最新か
